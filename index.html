@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hizuru Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="d-flex" id="wrapper">
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading px-3 py-4">
+                <span class="fs-4 fw-bold text-white">Hizuru<span class="text-warning">.</span></span>
+            </div>
+            <div class="list-group list-group-flush mt-3" id="sidebar-menu">
+                <a href="#" class="list-group-item active" data-section="dashboard-section"><i class="bi bi-grid-1x2-fill me-2"></i> Dashboard</a>
+                <a href="#" class="list-group-item" data-section="orders-section"><i class="bi bi-cart-check-fill me-2"></i> Order History</a>
+                <a href="#" class="list-group-item" data-section="inventory-section"><i class="bi bi-box-fill me-2"></i> Manage Stock</a>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4 shadow-sm">
+                <button class="btn btn-sm btn-dark" id="menu-toggle"><i class="bi bi-list"></i></button>
+                
+                <div class="ms-3 d-none d-md-flex w-50">
+                    <input class="form-control form-control-sm" type="search" placeholder="Search orders or products...">
+                </div>
+
+                <div class="ms-auto">
+                    <span class="small text-muted me-2">Logged in as: <strong>Admin</strong></span>
+                    <button class="btn btn-sm btn-outline-danger">Logout</button>
+                </div>
+            </nav>
+
+            <div class="container-fluid p-4">
+                
+                <div id="dashboard-section" class="content-section">
+                    <h5 class="mb-4 fw-bold">Performance Summary</h5>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 bg-white border-bottom border-primary border-4 shadow-sm">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Weekly Revenue</h6>
+                                        <h2 class="mb-0 fw-bold">₹84,200</h2>
+                                    </div>
+                                    <div class="icon-box bg-light-primary"><i class="bi bi-currency-rupee text-primary fs-3"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 bg-white border-bottom border-warning border-4 shadow-sm">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted mb-1">Pending Orders</h6>
+                                        <h2 class="mb-0 fw-bold">14</h2>
+                                    </div>
+                                    <div class="icon-box bg-light-warning"><i class="bi bi-clock-history text-warning fs-3"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stats-card p-4 bg-white border-bottom border-success border-4 shadow-sm">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h6 class="text-muted mb-1">In-Stock Items</h6>
+                                        <h2 class="mb-0 fw-bold">342</h2>
+                                    </div>
+                                    <div class="icon-box bg-light-success"><i class="bi bi-check-circle text-success fs-3"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-7">
+                            <div class="card border-0 shadow-sm p-4">
+                                <h6 class="fw-bold mb-3">Today's Quick List</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between">Verify order #26089 <span class="badge bg-secondary">To-do</span></li>
+                                    <li class="list-group-item d-flex justify-content-between">Restock Mechanical Keyboards <span class="badge bg-danger">Critical</span></li>
+                                    <li class="list-group-item d-flex justify-content-between">Update prices for Stickers <span class="badge bg-info">Done</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="inventory-section" class="content-section d-none">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold">Inventory Management</h5>
+
+            <button class="btn btn-primary btn-sm" onclick="showProductForm()"><i class="bi bi-plus-lg"></i> New Product</button>
+             </div>
+            <div id="addProductForm" class="card border-0 shadow-sm p-4 mb-4 d-none">
+    <h6 class="fw-bold border-bottom pb-2 mb-3">Add to Stock</h6>
+    <div class="row g-2">
+        <div class="col-md-3"><input type="text" id="pname" class="form-control" placeholder="Product Name"></div>
+        <div class="col-md-2"><input type="number" id="price" class="form-control" placeholder="Price"></div>
+        <div class="col-md-2"><input type="number" id="qty" class="form-control" placeholder="Quantity"></div>
+        <div class="col-md-3"><input type="text" id="category" class="form-control" placeholder="Category"></div>
+        <div class="col-md-2">
+            <button class="btn btn-success w-100" onclick="sendProductData()">Save</button>
+        </div>
+    </div>
+      <button class="btn btn-link btn-sm text-muted mt-2 p-0" onclick="cancelProduct()">Cancel</button>
+</div>
+
+ <div class="card border-0 shadow-sm p-3">
+    <h6 class="fw-bold mb-3">Current Inventory</h6>
+    <table class="table table-bordered" id="inventoryTable">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody id="inventoryBody">
+            <!-- Default stock -->
+            <tr>
+                <td>Wireless Mouse</td>
+                <td>₹500</td>
+                <td>3</td>
+                <td>Electronics</td>
+            </tr>
+            <tr>
+                <td>Keyboard</td>
+                <td>₹1200</td>
+                <td>10</td>
+                <td>Electronics</td>
+            </tr>
+            <tr>
+                <td>Notebook</td>
+                <td>₹50</td>
+                <td>25</td>
+                <td>Stationery</td>
+            </tr>
+        </tbody>
+    </table>
+</div>    
+                      
+                    <div class="alert alert-light border border-warning mt-3">
+                        <i class="bi bi-exclamation-triangle me-2"></i> <strong>Low Stock:</strong> 3 units of "Wireless Mouse" remaining.
+                    </div>
+                </div>
+
+                <div id="orders-section" class="content-section d-none">
+                    <div class="card border-0 shadow-sm">
+                        <div class="p-3"><h5 class="fw-bold mb-0">Order Tracking</h5></div>
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="bg-light">
+                                    <tr><th>ID</th><th>Customer</th><th>Item</th><th>Status</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>#26089</td><td>Spondon Nath</td><td>2026 Diary</td><td><span class="status-tag status-delivered">Delivered</span></td></tr>
+                                    <tr><td>#26090</td><td>Shubhada.B.Nath</td><td>Keyboard</td><td><span class="status-tag status-shipping">Shipping</span></td></tr>
+                                    <tr><td>#26091</td><td>Shubhankar Nath</td><td>Stickers</td><td><span class="status-tag status-cancelled">Cancelled</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = "login.html"; // Redirect to login if not authenticated
+      }
+
+// Add this to your Logout button in index.html
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = "login.html";
+        }
+        // Sidebar Toggle
+        document.getElementById("menu-toggle").onclick = () => {
+            document.getElementById("wrapper").classList.toggle("toggled");
+        };
+
+        // Navigation (Swapping sections)
+        const links = document.querySelectorAll('.list-group-item');
+        const sections = document.querySelectorAll('.content-section');
+
+        links.forEach(link => {
+            link.onclick = (e) => {
+                e.preventDefault();
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                sections.forEach(s => s.classList.add('d-none'));
+                document.getElementById(link.getAttribute('data-section')).classList.remove('d-none');
+            }
+        });
+
+        function showProductForm() { document.getElementById("addProductForm").classList.remove("d-none"); }
+        function cancelProduct() { document.getElementById("addProductForm").classList.add("d-none"); }
+        
+
+function sendProductData() {
+
+    let pname = document.getElementById("pname").value;
+    let price = document.getElementById("price").value;
+    let qty = document.getElementById("qty").value;
+    let category = document.getElementById("category").value;
+
+    if (!pname || !price || !qty || !category) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "add_prod.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    let data = "pname=" + pname + 
+               "&price=" + price + 
+               "&qty=" + qty + 
+               "&category=" + category;
+
+    xhr.onload = function () {
+        if (xhr.status == 200) {
+
+            localStorage.setItem("product", data);
+
+            // Add to table dynamically
+let table = document.getElementById("inventoryBody");
+
+let newRow = table.insertRow();
+
+newRow.insertCell(0).innerText = pname;
+newRow.insertCell(1).innerText = "₹" + price;
+newRow.insertCell(2).innerText = qty;
+newRow.insertCell(3).innerText = category;
+
+// Show popup
+document.getElementById("modalContent").innerHTML = "Product Added Successfully!";
+let modal = new bootstrap.Modal(document.getElementById('successModal'));
+modal.show();
+        }
+    };
+
+    xhr.send(data);
+
+    cancelProduct();
+}
+    </script>
+
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Success</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body" id="modalContent">
+        Product Added Successfully
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

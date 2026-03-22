@@ -1,0 +1,101 @@
+/* style.css */
+:root {
+    --periwinkle: #CCCCFF;
+    --lilac: #C8A2C8;
+    --mauve: #E0B0FF;
+    --thistle: #D8BFD8;
+    --airy-blue: #EBF4FA;
+    --silver-mist: #F5F5F7;
+    --deep-mauve: #734F96;
+    --glass-fill: rgba(255, 255, 255, 0.45);
+}
+
+body {
+    background: linear-gradient(135deg, var(--airy-blue) 0%, var(--thistle) 100%);
+    background-attachment: fixed;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: #4A4A5E;
+    margin: 0;
+}
+
+#wrapper {
+    display: flex;
+    width: 100%;
+}
+
+/* Sidebar: Fixed width for consistent layout */
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 240px; 
+    background: linear-gradient(180deg, var(--deep-mauve) 0%, var(--lilac) 100%);
+    box-shadow: 10px 0 30px rgba(115, 79, 150, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0; /* Prevents sidebar from squishing */
+}
+
+/* Main Content: Takes up remaining space */
+#page-content-wrapper {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 2rem 1.5rem;
+}
+
+#sidebar-wrapper .list-group-item {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+    border: none;
+    margin: 5px 15px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+#sidebar-wrapper .list-group-item.active {
+    background: white !important;
+    color: var(--deep-mauve) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Glassmorphism Cards: The logic to overwrite Bootstrap defaults */
+.card, .stats-card {
+    background: var(--glass-fill) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6) !important; /* Lighter border */
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+/* Fix for the bright borders in your screenshot */
+.border-primary { border: 1px solid rgba(255, 255, 255, 0.6) !important; border-bottom: 5px solid var(--periwinkle) !important; }
+.border-warning { border: 1px solid rgba(255, 255, 255, 0.6) !important; border-bottom: 5px solid var(--mauve) !important; }
+.border-success { border: 1px solid rgba(255, 255, 255, 0.6) !important; border-bottom: 5px solid var(--silver-mist) !important; }
+
+/* Status Tags */
+.status-tag {
+    border-radius: 8px;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-delivered { background: #E6E6FA; color: #6A5ACD; }
+.status-shipping { background: #F8F4FF; color: #9370DB; }
+.status-cancelled { background: #F5F5F5; color: #A9A9A9; }
+
+/* Animation */
+.content-section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
